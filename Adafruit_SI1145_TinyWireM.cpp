@@ -17,12 +17,12 @@
 
 #include "Adafruit_SI1145.h"
 
-Adafruit_SI1145::Adafruit_SI1145() {
+Adafruit_SI1145_TinyWireM::Adafruit_SI1145_TinyWireM() {
   _addr = SI1145_ADDR;
 }
 
 
-boolean Adafruit_SI1145::begin(void) {
+boolean Adafruit_SI1145_TinyWireM::begin(void) {
   TinyWireM.begin();
  
   uint8_t id = read8(SI1145_REG_PARTID);
@@ -90,7 +90,7 @@ boolean Adafruit_SI1145::begin(void) {
   return true;
 }
 
-void Adafruit_SI1145::reset() {
+void Adafruit_SI1145_TinyWireM::reset() {
   write8(SI1145_REG_MEASRATE0, 0);
   write8(SI1145_REG_MEASRATE1, 0);
   write8(SI1145_REG_IRQEN, 0);
@@ -110,28 +110,28 @@ void Adafruit_SI1145::reset() {
 //////////////////////////////////////////////////////
 
 // returns the UV index * 100 (divide by 100 to get the index)
-uint16_t Adafruit_SI1145::readUV(void) {
+uint16_t Adafruit_SI1145_TinyWireM::readUV(void) {
  return read16(0x2C); 
 }
 
 // returns visible+IR light levels
-uint16_t Adafruit_SI1145::readVisible(void) {
+uint16_t Adafruit_SI1145_TinyWireM::readVisible(void) {
  return read16(0x22); 
 }
 
 // returns IR light levels
-uint16_t Adafruit_SI1145::readIR(void) {
+uint16_t Adafruit_SI1145_TinyWireM::readIR(void) {
  return read16(0x24); 
 }
 
 // returns "Proximity" - assumes an IR LED is attached to LED
-uint16_t Adafruit_SI1145::readProx(void) {
+uint16_t Adafruit_SI1145_TinyWireM::readProx(void) {
  return read16(0x26); 
 }
 
 /*********************************************************************/
 
-uint8_t Adafruit_SI1145::writeParam(uint8_t p, uint8_t v) {
+uint8_t Adafruit_SI1145_TinyWireM::writeParam(uint8_t p, uint8_t v) {
   //Serial.print("Param 0x"); Serial.print(p, HEX);
   //Serial.print(" = 0x"); Serial.println(v, HEX);
   
@@ -140,41 +140,41 @@ uint8_t Adafruit_SI1145::writeParam(uint8_t p, uint8_t v) {
   return read8(SI1145_REG_PARAMRD);
 }
 
-uint8_t Adafruit_SI1145::readParam(uint8_t p) {
+uint8_t Adafruit_SI1145_TinyWireM::readParam(uint8_t p) {
   write8(SI1145_REG_COMMAND, p | SI1145_PARAM_QUERY);
   return read8(SI1145_REG_PARAMRD);
 }
 
 /*********************************************************************/
 
-uint8_t  Adafruit_SI1145::read8(uint8_t reg) {
+uint8_t  Adafruit_SI1145_TinyWireM::read8(uint8_t reg) {
   uint16_t val;
-    Wire.beginTransmission(_addr);
-    Wire.write((uint8_t)reg);
-    Wire.endTransmission();
+    TinyWireM.beginTransmission(_addr);
+    TinyWireM.write((uint8_t)reg);
+    TinyWireM.endTransmission();
 
-    Wire.requestFrom((uint8_t)_addr, (uint8_t)1);  
-    return Wire.read();
+    TinyWireM.requestFrom((uint8_t)_addr, (uint8_t)1);  
+    return TinyWireM.read();
 }
 
-uint16_t Adafruit_SI1145::read16(uint8_t a) {
+uint16_t Adafruit_SI1145_TinyWireM::read16(uint8_t a) {
   uint16_t ret;
 
-  Wire.beginTransmission(_addr); // start transmission to device 
-  Wire.write(a); // sends register address to read from
-  Wire.endTransmission(); // end transmission
+  TinyWireM.beginTransmission(_addr); // start transmission to device 
+  TinyWireM.write(a); // sends register address to read from
+  TinyWireM.endTransmission(); // end transmission
   
-  Wire.requestFrom(_addr, (uint8_t)2);// send data n-bytes read
-  ret = Wire.read(); // receive DATA
-  ret |= (uint16_t)Wire.read() << 8; // receive DATA
+  TinyWireM.requestFrom(_addr, (uint8_t)2);// send data n-bytes read
+  ret = TinyWireM.read(); // receive DATA
+  ret |= (uint16_t)TinyWireM.read() << 8; // receive DATA
 
   return ret;
 }
 
-void Adafruit_SI1145::write8(uint8_t reg, uint8_t val) {
+void Adafruit_SI1145_TinyWireM::write8(uint8_t reg, uint8_t val) {
 
-  Wire.beginTransmission(_addr); // start transmission to device 
-  Wire.write(reg); // sends register address to write
-  Wire.write(val); // sends value
-  Wire.endTransmission(); // end transmission
+  TinyWireM.beginTransmission(_addr); // start transmission to device 
+  TinyWireM.write(reg); // sends register address to write
+  TinyWireM.write(val); // sends value
+  TinyWireM.endTransmission(); // end transmission
 }
