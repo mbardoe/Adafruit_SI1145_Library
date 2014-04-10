@@ -1,5 +1,10 @@
 This is a library for the Si1145 UV/IR/Visible Light Sensor
 
+This branch of the Adafruit library is to be used with the TinyWireM library instead of the Wire library for use 
+with Gemma and Trinket.
+
+Some changes made by Matt Bardoe. 
+
 Designed specifically to work with the Si1145 sensor in the adafruit shop
   ----> https://www.adafruit.com/products/1777
 
