@@ -15,7 +15,7 @@
   BSD license, all text above must be included in any redistribution
  ****************************************************/
 
-#include "Adafruit_SI1145.h"
+#include "Adafruit_SI1145_TinyWireM.h"
 
 Adafruit_SI1145_TinyWireM::Adafruit_SI1145_TinyWireM() {
   _addr = SI1145_ADDR;
