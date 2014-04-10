@@ -11,6 +11,8 @@
   please support Adafruit and open-source hardware by purchasing 
   products from Adafruit!
 
+  Edited to work with the TinyWireM library for use with Gemma
+  by Matthew Bardoe
   Written by Limor Fried/Ladyada for Adafruit Industries.  
   BSD license, all text above must be included in any redistribution
  ****************************************************/
