@@ -146,9 +146,9 @@
 
 #define SI1145_ADDR 0x60
 
-class Adafruit_SI1145  {
+class Adafruit_SI1145_TinyWireM  {
  public:
-  Adafruit_SI1145(void);
+  Adafruit_SI1145_TinyWireM(void);
   boolean begin();
   void reset();
 
