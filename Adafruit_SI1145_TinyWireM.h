@@ -11,6 +11,8 @@
   please support Adafruit and open-source hardware by purchasing 
   products from Adafruit!
 
+  Edited by Matthew Bardoe to work with TinyWireM library 
+  
   Written by Limor Fried/Ladyada for Adafruit Industries.  
   BSD license, all text above must be included in any redistribution
  ****************************************************/
